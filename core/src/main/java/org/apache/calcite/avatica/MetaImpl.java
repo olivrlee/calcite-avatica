@@ -408,12 +408,32 @@ public abstract class MetaImpl implements Meta {
     public final String typeName = null;
     public final String selfReferencingColName = null;
     public final String refGeneration = null;
+    public  String exploreLabel = null;
+    public String exploreDescription = null;
+    public String exploreTags = null;
 
     public MetaTable(
         String tableCat,
         String tableSchem,
         String tableName,
-        String tableType) {
+        String tableType,
+        HashMap<String, String> metadataMap
+    ) {
+      this.tableCat = tableCat;
+      this.tableSchem = tableSchem;
+      this.tableName = tableName;
+      this.tableType = tableType;
+      this.exploreLabel = metadataMap.getOrDefault("EXPLORE_LABEL", null);
+      this.exploreDescription = metadataMap.getOrDefault("EXPLORE_DESCRIPTION", null);
+      this.exploreTags = metadataMap.getOrDefault("EXPLORE_TAGS", null);
+    }
+
+    public MetaTable(
+        String tableCat,
+        String tableSchem,
+        String tableName,
+        String tableType
+    ) {
       this.tableCat = tableCat;
       this.tableSchem = tableSchem;
       this.tableName = tableName;
