@@ -356,6 +356,25 @@ public abstract class MetaImpl implements Meta {
     @ColumnNoNulls
     public final String isGeneratedcolumn;
 
+    public String lookerFieldDescription = null;
+    public String lookerFieldLabel = null;
+    public String lookerFieldName = null;
+    public String lookerViewName = null;
+    public String lookerViewLabel = null;
+    public Boolean hidden = false;
+    public String lookerFieldGroupVariant = null;
+    public String dimensionGroup = null;
+    public String lookerFieldCategory = null;
+    public Boolean lookerUseStrictValueFormat = false;
+    public Boolean requiresRefreshOnSort = false;
+    public Boolean sortable = false;
+    public String valueFormat = null;
+    public String lookerType = null;
+    public String lookerFieldAlias = null;
+    public String tags = null;
+    public String filters = null;
+
+
     public MetaColumn(
         String tableCat,
         String tableSchem,
@@ -389,6 +408,69 @@ public abstract class MetaImpl implements Meta {
       this.isGeneratedcolumn = isGeneratedcolumn;
     }
 
+    public MetaColumn(
+        String tableCat,
+        String tableSchem,
+        String tableName,
+        String columnName,
+        int dataType,
+        String typeName,
+        Integer columnSize,
+        Integer decimalDigits,
+        Integer numPrecRadix,
+        int nullable,
+        Integer charOctetLength,
+        int ordinalPosition,
+        String isNullable,
+        String isAutoincrement,
+        String isGeneratedcolumn,
+        HashMap<String, Object> metadataMap
+    ) {
+      this.tableCat = tableCat;
+      this.tableSchem = tableSchem;
+      this.tableName = tableName;
+      this.columnName = columnName;
+      this.dataType = dataType;
+      this.typeName = typeName;
+      this.columnSize = columnSize;
+      this.decimalDigits = decimalDigits;
+      this.numPrecRadix = numPrecRadix;
+      this.nullable = nullable;
+      this.charOctetLength = charOctetLength;
+      this.ordinalPosition = ordinalPosition;
+      this.isNullable = isNullable;
+      this.isAutoincrement = isAutoincrement;
+      this.isGeneratedcolumn = isGeneratedcolumn;
+      this.lookerFieldDescription = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_DESCRIPTION", null);
+      this.lookerFieldLabel = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_LABEL", null);
+      this.lookerFieldName = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_NAME", null);
+      this.lookerViewName = (String) metadataMap.getOrDefault(
+          "LOOKER_VIEW_NAME", null);
+      this.lookerViewLabel = (String) metadataMap.getOrDefault(
+          "LOOKER_VIEW_LABEL", null);
+      this.hidden = (Boolean) metadataMap.getOrDefault("HIDDEN", false);
+      this.lookerFieldGroupVariant = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_GROUP_VARIANT", null);
+      this.dimensionGroup = (String) metadataMap.getOrDefault(
+          "DIMENSION_GROUP", null);
+      this.lookerFieldCategory = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_CATEGORY", null);
+      this.lookerUseStrictValueFormat = (Boolean) metadataMap.getOrDefault(
+          "LOOKER_USE_STRICT_VALUE_FORMAT", null);
+      this.requiresRefreshOnSort = (Boolean) metadataMap.getOrDefault(
+          "REQUIRES_REFRESH_ON_SORT", false);
+      this.sortable = (Boolean) metadataMap.getOrDefault("SORTABLE", false);
+      this.valueFormat = (String) metadataMap.getOrDefault("VALUE_FORMAT", null);
+      this.lookerType = (String) metadataMap.getOrDefault("LOOKER_TYPE", null);
+      this.lookerFieldAlias = (String) metadataMap.getOrDefault(
+          "LOOKER_FIELD_ALIAS", null);
+      this.tags = (String) metadataMap.getOrDefault("TAGS", null);
+      this.filters = (String) metadataMap.getOrDefault("FILTERS", null);
+    }
+
     public String getName() {
       return columnName;
     }
@@ -417,15 +499,15 @@ public abstract class MetaImpl implements Meta {
         String tableSchem,
         String tableName,
         String tableType,
-        HashMap<String, String> metadataMap
+        HashMap<String, Object> metadataMap
     ) {
       this.tableCat = tableCat;
       this.tableSchem = tableSchem;
       this.tableName = tableName;
       this.tableType = tableType;
-      this.exploreLabel = metadataMap.getOrDefault("EXPLORE_LABEL", null);
-      this.exploreDescription = metadataMap.getOrDefault("EXPLORE_DESCRIPTION", null);
-      this.exploreTags = metadataMap.getOrDefault("EXPLORE_TAGS", null);
+      this.exploreLabel = (String) metadataMap.getOrDefault("EXPLORE_LABEL", null);
+      this.exploreDescription = (String) metadataMap.getOrDefault("EXPLORE_DESCRIPTION", null);
+      this.exploreTags = (String) metadataMap.getOrDefault("EXPLORE_TAGS", null);
     }
 
     public MetaTable(
